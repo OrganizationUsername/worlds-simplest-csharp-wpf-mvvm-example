@@ -26,7 +26,7 @@ namespace MinimalMVVM.ViewModels
             get { return _history; }
         }
 
-        public ICommand ConvertTextCommand
+        public ICommand ConvertTextCommand  
         {
             get { return new DelegateCommand(ConvertText); }
         }
