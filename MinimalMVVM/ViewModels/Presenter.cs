@@ -7,7 +7,6 @@ namespace MinimalMVVM.ViewModels
 {
     public class Presenter : ObservableObject
     {
-        private readonly TextConverter _textConverter = new TextConverter(s => s.ToUpper());
         private string _someText;
         private readonly ObservableCollection<string> _history = new ObservableCollection<string>();
 
@@ -26,12 +25,17 @@ namespace MinimalMVVM.ViewModels
             get { return _history; }
         }
 
-        public ICommand ConvertTextCommand
+        public ICommand UCaseTextCommand
         {
-            get { return new DelegateCommand(ConvertText); }
+            get { return new DelegateCommand(UCaseText); }
         }
 
-        private void ConvertText()
+        public ICommand SpaceTextCommand
+        {
+            get { return new DelegateCommand(SpaceText); }
+        }
+
+        private void SpaceText()
         {
             if (string.IsNullOrWhiteSpace(SomeText))
             {
@@ -39,7 +43,20 @@ namespace MinimalMVVM.ViewModels
             }
             else
             {
-                AddToHistory(_textConverter.ConvertText(SomeText));
+                AddToHistory(new TextConverter(s => string.Join(" ", s.ToCharArray())).ConvertText(SomeText));
+                SomeText = string.Empty;
+            }
+        }
+
+        private void UCaseText()
+        {
+            if (string.IsNullOrWhiteSpace(SomeText))
+            {
+                return;
+            }
+            else
+            {
+                AddToHistory(new TextConverter(s => s.ToUpper()).ConvertText(SomeText));
                 SomeText = string.Empty;
             }
         }
