@@ -8,9 +8,15 @@ namespace MinimalMVVM.ViewModels
 
         protected void RaisePropertyChangedEvent(string propertyName)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler == null)
+            {
+
+            }
+            else
+            {
                 handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

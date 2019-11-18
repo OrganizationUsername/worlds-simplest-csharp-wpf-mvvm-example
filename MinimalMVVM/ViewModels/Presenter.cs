@@ -26,22 +26,34 @@ namespace MinimalMVVM.ViewModels
             get { return _history; }
         }
 
-        public ICommand ConvertTextCommand  
+        public ICommand ConvertTextCommand
         {
             get { return new DelegateCommand(ConvertText); }
         }
 
         private void ConvertText()
         {
-            if (string.IsNullOrWhiteSpace(SomeText)) return;
-            AddToHistory(_textConverter.ConvertText(SomeText));
-            SomeText = string.Empty;
+            if (string.IsNullOrWhiteSpace(SomeText))
+            {
+                return;
+            }
+            else
+            {
+                AddToHistory(_textConverter.ConvertText(SomeText));
+                SomeText = string.Empty;
+            }
         }
 
         private void AddToHistory(string item)
         {
-            if (!_history.Contains(item))
+            if (_history.Contains(item))
+            {
+
+            }
+            else
+            {
                 _history.Add(item);
+            }
         }
     }
 }

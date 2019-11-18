@@ -8,17 +8,19 @@
              d:DesignHeight="336"
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance ViewModels:Presenter}">
-
     <UserControl.InputBindings>
         <KeyBinding Key="Enter" Command="{Binding ConvertTextCommand}"/>
     </UserControl.InputBindings>
-    
+
     <StackPanel Height="336">
         <Label Foreground="Blue" Margin="5,5,5,0">Text To Convert</Label>
         <TextBox Text="{Binding SomeText, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
         <Label Foreground="Blue" Margin="5,5,5,0">History</Label>
         <ListBox ItemsSource="{Binding History}" Height="200" Margin="5"/>
-        <Button Command="{Binding ConvertTextCommand}" Margin="5">Convert</Button>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding ConvertTextCommand}" Margin="5">UCase</Button>
+            <Button Command="{Binding ConvertTextCommand}" Margin="5">AddSpaces</Button>
+        </StackPanel>
+        
     </StackPanel>
-    
 </UserControl>
